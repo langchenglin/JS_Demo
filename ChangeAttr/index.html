@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{width:300px;margin:0 auto;}
+        p{margin-bottom:10px;}
+        button{margin-right:5px;}
+        input{padding:3px;font-family:inherit;border:1px solid #ccc;}
+        #divs{color:#fff;width:180px;height:180px;background:#000;margin:0 auto;padding:10px;}
+
+    </style>
+
+    <script>
+
+        function fn(ele,attr,val){
+            ele.style[attr]=val;
+        }
+
+        window.onload=function(){
+            var divs=document.getElementById('divs'),
+                btn=document.getElementsByTagName('button'),
+                inp=document.getElementsByTagName('input');
+            btn[0].onclick=function(){
+              fn(divs,inp[0].value,inp[1].value)
+            }
+            btn[1].onclick=function(){
+                divs.removeAttribute('style');
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+
+
+ <div id="box">
+     <p>属性:<input type="text" value="background"></p>
+     <p>属性值:<input type="text" value="blue"></p>
+     <p><button>确定</button><button>重置</button></p>
+ </div>
+<div id="divs"></div>
+
+</body>
+</html>

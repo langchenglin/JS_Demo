@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{width:500px;margin:0 auto;padding:0;text-align:center;}
+        #box2{width:100px;height:100px;background:black;margin:10px auto;display:block;}
+
+    </style>
+
+    <script>
+
+        function fn(ele,att,val){
+            ele.style[att]=val;
+        }
+
+        window.onload=function(){
+            //找到节点
+            var  btn=document.getElementsByTagName('input'),
+                    box=document.getElementById('box2'),
+                    att=['width','height','background'],
+                    val=['200px','200px','red'];
+
+            //循环遍历
+            for(var i=0;i<btn.length;i++){
+                btn[i].index=i;
+                btn[i].onclick=function(){
+                    this.index==btn.length-1 && (box.style.cssText="");
+                    //调用  赋值
+                    fn(box,att[this.index],val[this.index])
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+
+   <div id="box">
+       <input type="button" value="变宽">
+       <input type="button" value="变高">
+       <input type="button" value="变色">
+       <div id="box2"></div>
+   </div>
+
+
+
+</body>
+</html>
