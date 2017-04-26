@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件: 封装解决兼容添加 删除事件 </title>
+    <style>
+        pre{color:green;padding:10px 15px;background:#f0f0f0;border:1px dotted #333;font:12px/1.5 Courier New;}
+        span{color:#999;}
+    </style>
+
+</head>
+<body>
+
+
+
+<pre>
+&lt;script type="text/javascript"&gt;
+var EventUtil = {
+	addHandler: function (oElement, sEvent, fnHandler) {
+		oElement.addEventListener ? oElement.addEventListener(sEvent, fnHandler, false) : oElement.attachEvent("on" + sEvent, fnHandler)
+	},
+	removeHandler: function (oElement, sEvent, fnHandler) {
+		oElement.removeEventListener ? oElement.removeEventListener(sEvent, fnHandler, false) : oElement.detachEvent("on" + sEvent, fnHandler)
+	},
+	addLoadHandler: function (fnHandler) {
+		this.addHandler(window, "load", fnHandler)
+	}
+}
+&lt;/script&gt;
+</pre>
+<center><input type="button" value="毫无用处的按钮"> <input type="button" value="绑定click"> <input type="button" value="解除绑定"></center>
+
+
+<script>
+   //封装兼容事件
+    var eventUtil={
+         addHandler:function(ele,event,fn){
+             ele.addEventListener?ele.addEventListener(event,fn,false):ele.attachEvent("on"+event,fn);
+         },
+        removeHandler:function(ele,event,fn){
+             ele.removeEventListener?ele.removeEventListener(event,fn,false):ele.detachEvent("on"+event,fn);
+        },
+        addLoadHandler:function(fn){
+             this.addHandler(window,'load',fn);
+        }
+    }
+
+    //点击事件
+    eventUtil.addLoadHandler(function(){
+        var btn=document.getElementsByTagName('input');
+
+        //绑定点击事件
+        eventUtil.addHandler(btn[1],'click',function(){
+            eventUtil.addHandler(btn[0],'click',fn);
+            btn[0].value='可以点击了';
+        })
+       //取消绑定事件
+        eventUtil.addHandler(btn[2],'click',function(){
+             eventUtil.removeHandler(btn[0],'click',fn);
+              btn[0].value='毫无用处的按钮';
+        })
+
+        function fn(){
+            alert('事件绑定成功');
+        }
+
+    })
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
